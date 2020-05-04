@@ -1,0 +1,648 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n# Shared vars across nodes aka lookup tbl",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-28T11:53:37+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h1>Shared vars across nodes aka lookup tbl</h1>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588063922827_-462259960",
+      "id": "paragraph_1588063922827_-462259960",
+      "dateCreated": "2020-04-28T11:52:02+0300",
+      "dateStarted": "2020-04-28T11:53:35+0300",
+      "dateFinished": "2020-04-28T11:53:35+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:105"
+    },
+    {
+      "text": "%md\n## Accumulators",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-28T11:53:52+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Accumulators</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588063995776_-895067240",
+      "id": "paragraph_1588063995776_-895067240",
+      "dateCreated": "2020-04-28T11:53:15+0300",
+      "dateStarted": "2020-04-28T11:53:50+0300",
+      "dateFinished": "2020-04-28T11:53:50+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:106"
+    },
+    {
+      "text": "%spark\nval sc = new SparkContext(...)\nval file = sc.textFile(\"file.txt\")\n\nval blankLines = sc.accumulator(0)\n\nval callSigns = file.flatMap(line => {\n    if (line == \"\"){\n        blankLines += 1\n    }\n    line.split(\" \")\n}) //due to map we evaluate lazily, so no action is undertaken until output and we do not have to reduce cross RDD results\n\ncallSigns.saveAsTextFile(\"output.txt\")\nprintln(\"Blank lines: \" + blankLines.value)",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-28T12:03:42+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588064026327_1910831390",
+      "id": "paragraph_1588064026327_1910831390",
+      "dateCreated": "2020-04-28T11:53:46+0300",
+      "status": "READY",
+      "$$hashKey": "object:107"
+    },
+    {
+      "text": "%md\n## Custom accums",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-28T12:08:51+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Custom accums</h2>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588064919812_-167052060",
+      "id": "paragraph_1588064919812_-167052060",
+      "dateCreated": "2020-04-28T12:08:39+0300",
+      "dateStarted": "2020-04-28T12:08:49+0300",
+      "dateFinished": "2020-04-28T12:08:49+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:108"
+    },
+    {
+      "text": "%spark\n//e.g. maximum value instead of increment\n//operation has to be \n//->c ommutative a op b = b op a\n//-> associative (a op b) op c = a op (b op c)",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-28T12:11:14+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588064929721_-1039334464",
+      "id": "paragraph_1588064929721_-1039334464",
+      "dateCreated": "2020-04-28T12:08:49+0300",
+      "status": "READY",
+      "$$hashKey": "object:109"
+    },
+    {
+      "text": "%md\n## Broadcasts\n*large shared var to be send across all work ndoes e.g. lookup tbl with bittorrent like sharing*",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:36:58+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Broadcasts</h2>\n<p><em>large shared var to be send across all work ndoes e.g. lookup tbl with bittorrent like sharing</em></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588065087697_-607909923",
+      "id": "paragraph_1588065087697_-607909923",
+      "dateCreated": "2020-04-28T12:11:27+0300",
+      "dateStarted": "2020-04-29T00:36:55+0300",
+      "dateFinished": "2020-04-29T00:36:55+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:110"
+    },
+    {
+      "text": "%spark\nval signPrefixes = sc.broadcast(loadCallSignTable())\nval countryContactCounts = contactCounts.map{case (sign, cnt) =>\n    val country = lookupinArray(sign, signPrefixes.value) //value java prop accesses broadcast\n    (country, cnt)\n}.reduceByKey((x, y) => x + y)\ncountryContactCounts.saveAsTextFile(outputDIr + \"/countries.txt\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:40:37+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588065095789_1105847810",
+      "id": "paragraph_1588065095789_1105847810",
+      "dateCreated": "2020-04-28T12:11:35+0300",
+      "status": "READY",
+      "$$hashKey": "object:111"
+    },
+    {
+      "text": "%md\n**When broadcasting it is important to serialize obj to be both fast and compact**\n*outofthebox serializer supports only primitive, so it is wise to select a different broadcaster e.g. Kryo*",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:43:09+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>When broadcasting it is important to serialize obj to be both fast and compact</strong><br />\n<em>outofthebox serializer supports only primitive, so it is wise to select a different broadcaster e.g. Kryo</em></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588110006513_-892017899",
+      "id": "paragraph_1588110006513_-892017899",
+      "dateCreated": "2020-04-29T00:40:06+0300",
+      "dateStarted": "2020-04-29T00:43:07+0300",
+      "dateFinished": "2020-04-29T00:43:07+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:112"
+    },
+    {
+      "text": "%spark\nval cores = Runtime.getRuntime().availableProcessors();",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:45:02+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mcores\u001b[0m: \u001b[1m\u001b[32mInt\u001b[0m = 8\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588110187561_1453746246",
+      "id": "paragraph_1588110187561_1453746246",
+      "dateCreated": "2020-04-29T00:43:07+0300",
+      "dateStarted": "2020-04-29T00:45:02+0300",
+      "dateFinished": "2020-04-29T00:45:02+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:113"
+    },
+    {
+      "text": "%md\n## Working on a per-partition basis\n*there is an online base of ham radio signs we can query for a public list of their logged contacts*\n*by using partition-based operations we can share a conn pool and not reuse db setup or JSON parser explicitly*",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:48:17+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588110292678_-20394947",
+      "id": "paragraph_1588110292678_-20394947",
+      "dateCreated": "2020-04-29T00:44:52+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:114",
+      "dateFinished": "2020-04-29T00:48:16+0300",
+      "dateStarted": "2020-04-29T00:48:16+0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Working on a per-partition basis</h2>\n<p><em>there is an online base of ham radio signs we can query for a public list of their logged contacts</em><br />\n<em>by using partition-based operations we can share a conn pool and not reuse db setup or JSON parser explicitly</em></p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%spark\nval contactsContactLists = validSigns.distinct().mapPartitions{ signs =>\n    val mapper = createMapper()\n    val client = new HttpClient()\n    client.start()\n    //create http req\n    signs.map{ sign =>\n        createExchangeForSign(sign)\n    //fetch responses\n    }.map{case (sign, exchange) =>\n        (sign, readExchangeCallLog(mapper, exchange))\n    }.filter(x => x._2 != null)\n}",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:53:15+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588110368664_-1257131595",
+      "id": "paragraph_1588110368664_-1257131595",
+      "dateCreated": "2020-04-29T00:46:08+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:927",
+      "dateFinished": "2020-04-29T00:53:07+0300",
+      "dateStarted": "2020-04-29T00:53:07+0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>val contactsContactLists = validSigns.distinct().mapPartitions{ signs =&gt;<br />\nval mapper = createMapper()<br />\nval client = new HttpClient()<br />\nclient.start()<br />\n//create http req<br />\nsigns.map{ sign =&gt;<br />\ncreateExchangeForSign(sign)<br />\n//fetch responses<br />\n}.map{case (sign, exchange) =&gt;<br />\n(sign, readExchangeCallLog(mapper, exchange))<br />\n}.filter(x =&gt; x._2 != null)<br />\n}</p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n### other per-partition ops\n* maxPartitionsWithIndex\n* foreachPartition",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:54:00+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588110781757_-273432244",
+      "id": "paragraph_1588110781757_-273432244",
+      "dateCreated": "2020-04-29T00:53:01+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1021",
+      "dateFinished": "2020-04-29T00:53:58+0300",
+      "dateStarted": "2020-04-29T00:53:58+0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>other per-partition ops</h3>\n<ul>\n<li>maxPartitionsWithIndex</li>\n<li>foreachPartition</li>\n</ul>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n## Piping like a chad",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T00:57:18+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588110838894_-1009220296",
+      "id": "paragraph_1588110838894_-1009220296",
+      "dateCreated": "2020-04-29T00:53:58+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1122",
+      "dateFinished": "2020-04-29T00:57:17+0300",
+      "dateStarted": "2020-04-29T00:57:17+0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Piping like a chad</h2>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588111032216_1365947604",
+      "id": "paragraph_1588111032216_1365947604",
+      "dateCreated": "2020-04-29T00:57:12+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1204",
+      "text": "#!/usr/bin/env Rscript\nlibrary(\"Imap\")\nf <- file(\"stdin\")\nopen(f)\nwhile(length(line <- readLines(f, n=1)) > 0) {\n    #process line\n    contents <- Map(as.numeric, strsplit(line, \",\"))\n    mydist <- gdist(contents[[1]][1], contents[[1]][2],\n                    contents[[1]][3], contents[[1]][4],\n                    units=\"m\", a= 6378137.0, b=5366752.3142, verbose = FALSE}\n    write(mydist, stdout())\n}",
+      "dateUpdated": "2020-04-29T01:01:08+0300",
+      "dateFinished": "2020-04-29T01:00:53+0300",
+      "dateStarted": "2020-04-29T01:00:53+0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>#!/usr/bin/env Rscript<br />\nlibrary(&ldquo;Imap&rdquo;)<br />\nf &lt;- file(&ldquo;stdin&rdquo;)<br />\nopen(f)<br />\nwhile(length(line &lt;- readLines(f, n=1)) &gt; 0) {<br />\n#process line<br />\ncontents &lt;- Map(as.numeric, strsplit(line, &ldquo;,&rdquo;))<br />\nmydist &lt;- gdist(contents<a href=\"1\">1</a>[1], contents<a href=\"1\">1</a>[2],<br />\ncontents<a href=\"1\">1</a>[3], contents<a href=\"1\">1</a>[4],<br />\nunits=&ldquo;m&rdquo;, a= 6378137.0, b=5366752.3142, verbose = FALSE}<br />\nwrite(mydist, stdout())<br />\n}</p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%md\n$ **./src/R/finddistance.R**\n*cord_x1, cord_y1, cord_x2, cord_y2*\n349.2602",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T01:02:56+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588111253485_-2116313049",
+      "id": "paragraph_1588111253485_-2116313049",
+      "dateCreated": "2020-04-29T01:00:53+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1302",
+      "dateFinished": "2020-04-29T01:02:54+0300",
+      "dateStarted": "2020-04-29T01:02:54+0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>$ <strong>./src/R/finddistance.R</strong><br />\n<em>cord_x1, cord_y1, cord_x2, cord_y2</em><br />\n349.2602</p>\n\n</div>"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%spark\nval distScript = \"./scr/R/finddistance.R\"\nval distScriptName = \"finddistance.R\"\nsc.addFile(distScript) //files can come from hostm hdfs, http, ftp\n\nval distances = contactsContactLists.values.flatMap(x => x.map(y =>\n    s\"$y.contactlay,$y.contactlong,$y.mylat,$y.mylong\")).pipe(Seq(\n        SparkFiles.get(distScriptName)))\nprintln(distances.collect.toList)",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29T01:06:33+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588111374451_1252162180",
+      "id": "paragraph_1588111374451_1252162180",
+      "dateCreated": "2020-04-29T01:02:54+0300",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:1387"
+    }
+  ],
+  "name": "spark_advanced",
+  "id": "2F729B7CQ",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/home/bane/projects/notes/spark_advanced"
+}

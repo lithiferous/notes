@@ -1,0 +1,253 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md\n### Tuning degree of parallelism and shuffle",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T11:51:35+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Tuning degree of parallelism and shuffle</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588582255134_-1255787306",
+      "id": "paragraph_1588582255134_-1255787306",
+      "dateCreated": "2020-05-04T11:50:55+0300",
+      "dateStarted": "2020-05-04T11:51:31+0300",
+      "dateFinished": "2020-05-04T11:51:32+0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1117"
+    },
+    {
+      "text": "%spark\nval input = sc.textFile(\"s3n://log-files/2014/*.log\")\ninput.partitions.length\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T11:53:07+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588582291719_1862615892",
+      "id": "paragraph_1588582291719_1862615892",
+      "dateCreated": "2020-05-04T11:51:31+0300",
+      "status": "READY",
+      "$$hashKey": "object:1118"
+    },
+    {
+      "text": "%spark\nval lines = input.filter(line => line.startsWith(\"2014-10-17\"))\nlines.partitions.length\n//351525",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T11:55:22+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588582387385_-1068991567",
+      "id": "paragraph_1588582387385_-1068991567",
+      "dateCreated": "2020-05-04T11:53:07+0300",
+      "status": "READY",
+      "$$hashKey": "object:1119"
+    },
+    {
+      "text": "%spark\nval lines2 = lines.coalesce(5).cache\nlines.partitions.length\n//4\nlines.count",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T11:55:40+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588582479672_399735036",
+      "id": "paragraph_1588582479672_399735036",
+      "dateCreated": "2020-05-04T11:54:39+0300",
+      "status": "READY",
+      "$$hashKey": "object:1120"
+    },
+    {
+      "text": "%md\n### Serializing data spilled on disk more effectively",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T12:10:08+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Serializing data spilled on disk more effectively</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588583383241_-171011677",
+      "id": "paragraph_1588583383241_-171011677",
+      "dateCreated": "2020-05-04T12:09:43+0300",
+      "dateStarted": "2020-05-04T12:10:07+0300",
+      "dateFinished": "2020-05-04T12:10:07+0300",
+      "status": "FINISHED",
+      "$$hashKey": "object:1121"
+    },
+    {
+      "text": "%spark\nimport org.apache.spark.SparkConf\n\nval conf = new SparkConf()\nconf.set(\"spark.serializer\", \"org.apache.spark.serializer.KryoSerializer\")\n//be strict about class registration\nconf.set(\"spark.kryo.registrationRequired\", \"true\")\nconf.registerKryoClasses(Array(classOf[MyClass], classOf[MyOtherClass]))",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T12:15:52+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588583341714_1525882579",
+      "id": "paragraph_1588583341714_1525882579",
+      "dateCreated": "2020-05-04T12:09:01+0300",
+      "status": "READY",
+      "$$hashKey": "object:1122"
+    },
+    {
+      "text": "%md\n### Memory management\n* RDD storage - persist cache -> memory buffers (spark.storage.memoryFraction)\n* Shuffle & aggregation buffers -> intermediate data shuffle buffers (spark.shuffle.memoryFraction)\n*By default spark leaves 60% for rdds, 20% for shuffle and 20% for user code*",
+      "user": "anonymous",
+      "dateUpdated": "2020-05-04T12:20:09+0300",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1588583820544_-727508283",
+      "id": "paragraph_1588583820544_-727508283",
+      "dateCreated": "2020-05-04T12:17:00+0300",
+      "status": "READY",
+      "$$hashKey": "object:1123"
+    }
+  ],
+  "name": "spark_performance",
+  "id": "2F9GSQJDY",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/home/bane/projects/notes/spark_performance"
+}
